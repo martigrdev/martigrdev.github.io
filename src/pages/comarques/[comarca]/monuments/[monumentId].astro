@@ -1,0 +1,52 @@
+---
+import { monuments } from "../../../../data/monuments";
+import Layout from "../../../../layouts/Layout.astro";
+import "../../../../styles/main.css";
+
+export async function getStaticPaths() {
+  const paths = [];
+
+  for (const [comarca, monumentsList] of Object.entries(monuments)) {
+    for (const monument of monumentsList) {
+      paths.push({
+        params: {
+          comarca,
+          monumentId: monument.id,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { comarca, monumentId } = Astro.params;
+const monument = monuments[comarca]?.find((m) => m.id === monumentId);
+
+if (!monument) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout>
+  <div class="container">
+    <nav class="margin-bottom">
+      <a href={`/comarques/${comarca}`} class="nav-link">
+        ← Tornar a {comarca}
+      </a>
+    </nav>
+
+    <article class="card">
+      {
+        monument.imatge && (
+          <img src={monument.imatge} alt={monument.nom} class="img-cover" />
+        )
+      }
+
+      <div class="content">
+        <h1 class="title">{monument.nom}</h1>
+        <p class="text" set:html={monument.article}></p>
+      </div>
+    </article>
+  </div>
+</Layout>

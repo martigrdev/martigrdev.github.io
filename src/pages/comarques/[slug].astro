@@ -1,0 +1,108 @@
+---
+import { monuments } from "../../data/monuments";
+import "../../styles/main.css";
+
+export async function getStaticPaths() {
+  const comarques = [
+    // Catalunya oficial (42 comarques)
+    "alta-ribagorca",
+    "alt-camp",
+    "alt-emporda",
+    "alt-urgell",
+    "anoia",
+    "bages",
+    "baix-camp",
+    "baix-ebre",
+    "baix-emporda",
+    "baix-llobregat",
+    "baix-penedes",
+    "barcelones",
+    "bergueda",
+    "cerdanya",
+    "conca-barbera",
+    "garraf",
+    "garrigues",
+    "garrotxa",
+    "girones",
+    "maresme",
+    "moianes",
+    "montsia",
+    "noguera",
+    "osona",
+    "pallars-jussa",
+    "pallars-sobira",
+    "pla-destany",
+    "pla-urgell",
+    "priorat",
+    "ribera-ebre",
+    "ripolles",
+    "segarra",
+    "segria",
+    "selva",
+    "solsones",
+    "tarragones",
+    "terra-alta",
+    "urgell",
+    "aran",
+    "valles-occidental",
+    "valles-oriental",
+    "capcir",
+    "vallespir",
+    "rossello",
+    "conflent",
+    "cerdanya-nord",
+  ];
+
+  return comarques.map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const monumentsComarca = monuments[slug] || [];
+
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="container">
+    <h1 class="title">Comarca: {slug}</h1>
+    <img src={`/media/svg/comarques/${slug}.svg`} alt={slug}>
+
+    {
+      monumentsComarca.length > 0 ? (
+        <div class="card-grid">
+          {monumentsComarca.map((monument) => (
+            <div class="card">
+              {monument.imatge && (
+                <img
+                  src={monument.imatge}
+                  alt={monument.nom}
+                  class="img-monument"
+                />
+              )}
+              <div class="content">
+                <h2 class="subtitle">{monument.nom}</h2>
+                <p class="text" set:html={monument.descripcio}></p>
+                <a
+                  href={`/comarques/${slug}/monuments/${monument.id}`}
+                  class="button"
+                >
+                  Més informació
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="text">
+          Encara no hi ha monuments registrats per aquesta comarca.
+        </p>
+      )
+    }
+
+    <p class="margin-top">
+      <a href="/" class="nav-link"> ← Tornar al mapa </a>
+    </p>
+  </div>
+</Layout>
