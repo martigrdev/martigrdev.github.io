@@ -4,7 +4,63 @@ import Mapa from '../components/Mapa.astro';
 ---
 
 <Layout>
-	<main>
-		<Mapa />
-	</main>
+  <main>
+    <div class="mapa">
+      <Mapa />
+      <div class="mapa-index">
+        <h3>Mapa Interactiu</h3>
+        <ul class="mapa-ul">
+          <li><div class="comarca-si"></div>Comarca Activa</li>
+          <li><div class="comarca-no"></div>Comarca No Activa</li>
+        </ul>
+      </div>
+    </div>
+  </main>
 </Layout>
+
+<style>
+  .mapa {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 20px;
+  }
+  .mapa > :first-child {
+    align-self: center;
+  }
+  .mapa > .mapa-index {
+    align-self: end;
+	padding-bottom: 150px;
+  }
+  .mapa-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .comarca-si {
+    background-color: #ffa9a9;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .comarca-no {
+    background-color: #fff1f1;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .mapa-ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    .mapa {
+      grid-template-columns: 1fr;	  
+      justify-items: right;
+    }
+	.mapa-index {
+	  padding-bottom: 0;
+  }
+</style>

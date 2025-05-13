@@ -2,72 +2,88 @@
 import { monuments } from "../../data/monuments";
 import "../../styles/main.css";
 
-export async function getStaticPaths() {
-  const comarques = [
-    // Catalunya oficial (42 comarques)
-    "alta-ribagorca",
-    "alt-camp",
-    "alt-emporda",
-    "alt-urgell",
-    "anoia",
-    "bages",
-    "baix-camp",
-    "baix-ebre",
-    "baix-emporda",
-    "baix-llobregat",
-    "baix-penedes",
-    "barcelones",
-    "bergueda",
-    "cerdanya",
-    "conca-barbera",
-    "garraf",
-    "garrigues",
-    "garrotxa",
-    "girones",
-    "maresme",
-    "moianes",
-    "montsia",
-    "noguera",
-    "osona",
-    "pallars-jussa",
-    "pallars-sobira",
-    "pla-destany",
-    "pla-urgell",
-    "priorat",
-    "ribera-ebre",
-    "ripolles",
-    "segarra",
-    "segria",
-    "selva",
-    "solsones",
-    "tarragones",
-    "terra-alta",
-    "urgell",
-    "aran",
-    "valles-occidental",
-    "valles-oriental",
-    "capcir",
-    "vallespir",
-    "rossello",
-    "conflent",
-    "cerdanya-nord",
-  ];
+export const comarquesNoms: { [key: string]: string } = {
+  "alta-ribagorca": "Alta Ribagorça",
+  "alt-camp": "Alt Camp",
+  "alt-emporda": "Alt Empordà",
+  "alt-urgell": "Alt Urgell",
+  "anoia": "Anoia",
+  "bages": "Bages",
+  "baix-camp": "Baix Camp",
+  "baix-ebre": "Baix Ebre",
+  "baix-emporda": "Baix Empordà",
+  "baix-llobregat": "Baix Llobregat",
+  "baix-penedes": "Baix Penedès",
+  "barcelones": "Barcelonès",
+  "bergueda": "Berguedà",
+  "cerdanya": "Cerdanya",
+  "conca-barbera": "Conca de Barberà",
+  "garraf": "Garraf",
+  "garrigues": "Garrigues",
+  "garrotxa": "Garrotxa",
+  "girones": "Gironès",
+  "maresme": "Maresme",
+  "moianes": "Moianès",
+  "montsia": "Montsià",
+  "noguera": "Noguera",
+  "osona": "Osona",
+  "pallars-jussa": "Pallars Jussà",
+  "pallars-sobira": "Pallars Sobirà",
+  "pla-destany": "Pla de l'Estany",
+  "pla-urgell": "Pla d'Urgell",
+  "priorat": "Priorat",
+  "ribera-ebre": "Ribera d'Ebre",
+  "ripolles": "Ripollès",
+  "segarra": "Segarra",
+  "segria": "Segrià",
+  "selva": "Selva",
+  "solsones": "Solsonès",
+  "tarragones": "Tarragonès",
+  "terra-alta": "Terra Alta",
+  "urgell": "Urgell",
+  "aran": "Val d'Aran",
+  "valles-occidental": "Vallès Occidental",
+  "valles-oriental": "Vallès Oriental",
+  "capcir": "Capcir",
+  "vallespir": "Vallespir",
+  "rossello": "Rosselló",
+  "conflent": "Conflent",
+  "cerdanya-nord": "Cerdanya Nord"
+};
 
-  return comarques.map((slug) => ({
+export async function getStaticPaths() {
+  return Object.keys(comarquesNoms).map((slug) => ({
     params: { slug },
   }));
 }
 
 const { slug } = Astro.params;
 const monumentsComarca = monuments[slug] || [];
+const nomComarca = comarquesNoms[slug] || slug;
 
 import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout>
   <div class="container">
-    <h1 class="title">Comarca: {slug}</h1>
-    <img src={`/media/svg/comarques/${slug}.svg`} alt={slug}>
+    <h1 class="title">{nomComarca}</h1>
+    <div class="container-comarca">
+      <div class="comarca-item">
+        <img src={`/media/svg/comarques/${slug}.svg`} alt={slug} />
+      </div>
+      <div class="comarca-item">
+          <h2>Reconstruccions de la comarca:</h2>
+          <ul class="monuments-list">
+            {monumentsComarca.map((monument) => (
+              <li><a
+                  href={`/comarques/${slug}/monuments/${monument.id}`} class="reconstruccions">{monument.nom}</a></li>
+            ))}
+          </ul>
+        
+      </div>
+    </div>
+    <div class="galeria">
+    <h2>Recreacions Històriques</h2>
 
     {
       monumentsComarca.length > 0 ? (
@@ -83,7 +99,7 @@ import Layout from "../../layouts/Layout.astro";
               )}
               <div class="content">
                 <h2 class="subtitle">{monument.nom}</h2>
-                <p class="text" set:html={monument.descripcio}></p>
+                <p class="text" set:html={monument.descripcio} />
                 <a
                   href={`/comarques/${slug}/monuments/${monument.id}`}
                   class="button"
@@ -100,9 +116,62 @@ import Layout from "../../layouts/Layout.astro";
         </p>
       )
     }
+    </div>
 
     <p class="margin-top">
       <a href="/" class="nav-link"> ← Tornar al mapa </a>
     </p>
   </div>
 </Layout>
+
+<style>
+  .reconstruccions{
+    color: #b81d1d;
+    text-decoration: none;
+  }
+  .reconstruccions:hover{
+    color: #8b0000;
+  }
+  .card-grid {
+    text-align: justify;
+  }
+  .content {
+    text-align: center;
+  }
+  .container-comarca {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    .container-comarca {
+      grid-template-columns: 1fr;
+    }
+  }
+  .comarca-item {
+    justify-self: center;
+  }
+  .comarca-item img {
+    width: 100%;
+    height: auto;
+  }
+  .monuments-list {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+  }
+  .monuments-list li {
+    margin-bottom: 0.5rem;
+    color: #b81d1d;
+  }
+  .galeria {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

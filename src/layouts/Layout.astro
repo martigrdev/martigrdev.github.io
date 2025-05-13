@@ -14,8 +14,8 @@
         </button>
         <ul class="nav-links">
           <li><a href="/">Inici</a></li>
-          <li><a href="/reconstruccions">Reconstruccions</a></li>
-          <li><a href="/about">El projecte</a></li>
+          <li><a href="/recreacions">Reconstruccions</a></li>
+          <li><a href="/projecte">El projecte</a></li>
           <li><a href="/contacte">Contacte</a></li>
         </ul>
       </nav>
@@ -67,17 +67,13 @@
   body {
     margin: 0;
     width: 100%;
-    min-height: 100vh;
     font-size: 16px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: var(--text-color);
     display: flex;
     flex-direction: column;
   }
 
-  body > * {
-    width: 100%;
-  }
   main {
     max-width: 1200px;
     margin: 0 auto;
@@ -206,6 +202,9 @@
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    body {
+      font-size: 11px;
+    }
     .nav-toggle {
       display: block;
     }

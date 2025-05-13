@@ -45,8 +45,16 @@ if (!monument) {
 
       <div class="content">
         <h1 class="title">{monument.nom}</h1>
+          <div set:html={monument.sketchfabId}></div>
         <p class="text" set:html={monument.article}></p>
       </div>
     </article>
   </div>
 </Layout>
+
+<style>
+
+
+
+
+</style>
