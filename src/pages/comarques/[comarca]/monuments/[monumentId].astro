@@ -2,6 +2,7 @@
 import { monuments } from "../../../../data/monuments";
 import Layout from "../../../../layouts/Layout.astro";
 import "../../../../styles/main.css";
+import { comarquesNoms } from "../../[slug].astro";
 
 export async function getStaticPaths() {
   const paths = [];
@@ -22,6 +23,7 @@ export async function getStaticPaths() {
 
 const { comarca, monumentId } = Astro.params;
 const monument = monuments[comarca]?.find((m) => m.id === monumentId);
+const nomComarca = comarquesNoms[comarca] || comarca;
 
 if (!monument) {
   return Astro.redirect("/404");
@@ -32,7 +34,7 @@ if (!monument) {
   <div class="container">
     <nav class="margin-bottom">
       <a href={`/comarques/${comarca}`} class="nav-link">
-        ← Tornar a {comarca}
+        ← Tornar a {nomComarca}
       </a>
     </nav>
 

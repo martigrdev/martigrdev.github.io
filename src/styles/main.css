@@ -3,20 +3,19 @@
 
 /* Estils de navegació */
 .nav-link {
-  color: #5a0606;
+  color: #b81d1d;
   text-decoration: none;
 }
 
 .nav-link:hover {
-  color:#b81d1d;
+  color:#850808;
 }
 
 /* Estils de la targeta */
 .card {
-  background-color: rgb(255, 247, 247);
-  border-top: 6px solid #b81d1d;
-  border-bottom: 3px solid #b81d1d;
-  border-radius:6px 6px 3px 3px;
+
+  border: 2px solid #b81d1d;
+  border-radius: 20px;
   overflow: hidden;
   margin-top: 30px;
   text-align: justifyuil;
@@ -53,7 +52,7 @@ h4,
 h5,
 h6 {
   font-weight: bold;
-  color: #5a0606;
+  color: #222222;
 }
 h1 {
   text-align: center;
