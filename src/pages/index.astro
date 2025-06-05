@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Mapa from '../components/Mapa.astro';
+import UltimsProjectes from '../components/UltimsProjectes.astro';
 ---
 
 <Layout>
@@ -15,6 +16,7 @@ import Mapa from '../components/Mapa.astro';
         </ul>
       </div>
     </div>
+    <UltimsProjectes />
   </main>
 </Layout>
 
@@ -60,7 +62,8 @@ import Mapa from '../components/Mapa.astro';
       grid-template-columns: 1fr;	  
       justify-items: right;
     }
-	.mapa-index {
-	  padding-bottom: 0;
+    .mapa > .mapa-index {
+    align-self: end;
+	padding-bottom: 20px;
   }
 </style>

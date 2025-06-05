@@ -1,0 +1,168 @@
+---
+import { monuments } from '../data/monuments';
+
+interface Props {
+  monumentId: string;
+}
+
+const { monumentId } = Astro.props;
+
+const monument = Object.values(monuments)
+  .flatMap(comarca => comarca)
+  .find(m => m.id === monumentId);
+
+const images = monument?.imatges || [];
+---
+
+{images.length > 0 && (
+  <div class="slider">
+    <div class="slider-container">
+      {images.map((image, index) => (
+        <div class="slide" data-index={index}>
+          <img src={image} alt={monument?.nom} />
+        </div>
+      ))}
+    </div>
+    
+    <button class="nav-button prev" aria-label="Anterior">&lt;</button>
+    <button class="nav-button next" aria-label="Següent">&gt;</button>
+    
+    <div class="dots">
+      {images.map((_, index) => (
+        <button 
+          class="dot" 
+          data-index={index} 
+          aria-label={`Imatge ${index + 1}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+)}
+
+<style>
+  .slider {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .slider-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 2;
+  }
+
+  .nav-button:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+  .dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .dot.active {
+    background: white;
+  }
+</style>
+
+<script>
+  function initSlider() {
+    const slider = document.querySelector('.slider');
+    if (!slider) return;
+
+    const container = slider.querySelector('.slider-container');
+    const slides = slider.querySelectorAll('.slide');
+    const dots = slider.querySelectorAll('.dot');
+    const prevBtn = slider.querySelector('.prev');
+    const nextBtn = slider.querySelector('.next');
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    function updateSlider() {
+      container.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = (index + totalSlides) % totalSlides;
+      updateSlider();
+    }
+
+    prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Autoplay
+    let autoplayInterval = setInterval(() => goToSlide(currentIndex + 1), 5000);
+
+    slider.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+    slider.addEventListener('mouseleave', () => {
+      autoplayInterval = setInterval(() => goToSlide(currentIndex + 1), 5000);
+    });
+
+    // Inicialitzar l'estat
+    updateSlider();
+  }
+
+  // Inicialitzar tots els sliders a la pàgina
+  document.addEventListener('DOMContentLoaded', initSlider);
+</script>

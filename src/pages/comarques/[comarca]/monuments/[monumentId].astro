@@ -3,6 +3,7 @@ import { monuments } from "../../../../data/monuments";
 import Layout from "../../../../layouts/Layout.astro";
 import "../../../../styles/main.css";
 import { comarquesNoms } from "../../[slug].astro";
+import Slider from "../../../../components/Slider.astro";
 
 export async function getStaticPaths() {
   const paths = [];
@@ -28,6 +29,8 @@ const nomComarca = comarquesNoms[comarca] || comarca;
 if (!monument) {
   return Astro.redirect("/404");
 }
+
+
 ---
 
 <Layout>
@@ -38,10 +41,10 @@ if (!monument) {
       </a>
     </nav>
 
-    <article class="card">
+    <article class="card-m">
       {
-        monument.imatge && (
-          <img src={monument.imatge} alt={monument.nom} class="img-cover" />
+        monument.imatges && monument.imatges.length > 0 && (
+          <img src={monument.imatges[0]} alt={monument.nom} class="img-cover" />
         )
       }
 
@@ -51,11 +54,16 @@ if (!monument) {
         <p class="text" set:html={monument.article}></p>
       </div>
     </article>
+    <Slider monumentId={monument.id}/>
   </div>
 </Layout>
 
 <style>
 
-
+.card-m {
+}
+.img-cover {
+  border-radius: 30px 30px 0 0;
+}
 
 </style>

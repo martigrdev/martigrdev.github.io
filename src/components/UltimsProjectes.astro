@@ -1,0 +1,103 @@
+---
+import { monuments } from "../data/monuments";
+import "../styles/main.css";
+
+// Obtenir tots els monuments, ordenar-los per número i agafar els 2 últims
+const totsElsMonuments = Object.values(monuments).flat();
+const ultimsProjectes = totsElsMonuments
+  .sort((a, b) => a.numero - b.numero)
+  .slice(-2);
+---
+
+<div class="container">
+  <h2>Últims Projectes</h2>
+  <div class="grid-uprojectes">
+    {ultimsProjectes.length > 0 ? (
+      <div class="card-grid">
+        {ultimsProjectes.map((monument) => (
+          <div class="card">
+            {monument.imatges && monument.imatges.length > 0 && (
+              <img
+                src={monument.imatges[0]} 
+                alt={monument.nom}
+                class="img-monument"
+              />
+            )}
+            <div class="content">
+              <h2 class="subtitle">{monument.nom}</h2>
+              <p class="text" set:html={monument.epoca} />
+              <a
+                href={`/comarques/${monument.comarca}/monuments/${monument.id}`}
+                class="button"
+              >
+                Visita
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="text">
+        Encara no hi ha monuments registrats.
+      </p>
+    )}
+  </div>
+</div>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    text-align: justify;
+  }
+  
+  .img-monument {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  .content {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #b81d1d;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #ffffff;
+    color: #850808;
+    border: 1px solid #850808;
+  }
+  .grid-uprojectes {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  h2 {
+    text-align: center;
+    font-weight: bold;
+  }
+  @media (max-width: 768px) {
+    .container {
+      padding: 0.25rem;
+    }
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

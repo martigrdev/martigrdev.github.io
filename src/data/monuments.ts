@@ -5,8 +5,9 @@ interface Monument {
     epoca: string;
     article: string;
     sketchfabId?: string;
-    imatge?: string;
+    imatges?: string[];
     comarca: string;
+    numero: number;
 }
 
 interface ComarcaMonuments {
@@ -98,7 +99,7 @@ export const monuments: ComarcaMonuments = {
                       <div class="article-galeria">
                         <h2>Galeria</h2>
                         <div class="article-galeria-img">
-                          <img src="/media/img/monuments/balsareny-img/maurici-1.png" alt="Vista de les ruïnes del Fortí de Sant Maurici, a Balsareny">
+                          <Slider monumentId={monumentId} />
                         </div>
                       </div>
                       <div class="article-video">
@@ -120,8 +121,14 @@ export const monuments: ComarcaMonuments = {
                       </div>
                     </article>`,
         sketchfabId: '<div class="visor"><iframe class="responsive-iframe" title="Fortí de Sant Maurici" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/0f491a0aeca048dd944fc3826caa0a9d/embed"> </iframe></div>',
-        imatge: '/media/img/monuments/balsareny-img/maurici-1.png',
-        comarca: 'bages'
+        imatges: ['/media/img/monuments/balsareny-img/maurici-1.png',
+                  '/media/img/monuments/balsareny-img/maurici-2.png',
+                  '/media/img/monuments/balsareny-img/maurici-3.png',
+                  '/media/img/monuments/balsareny-img/maurici-4.png',
+                  '/media/img/monuments/balsareny-img/maurici-5.png'
+                  ],
+        comarca: 'bages',
+        numero: 1
       }
     ],
     'baix-camp': [
@@ -176,8 +183,14 @@ export const monuments: ComarcaMonuments = {
                   </article>
                   `,
         sketchfabId: '<div class="visor"><iframe class="responsive-iframe" title="La Ciutadella i Plaça Fortificada de Palamós" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/fb320f6687444b02a27e43d5dbacd538/embed"> </iframe></div>',
-        imatge: '/media/img/monuments/palamos-img/palamos-1.png',
-        comarca: 'baix-emporda'
+        imatges: ['/media/img/monuments/palamos-img/palamos-1.png',
+                  '/media/img/monuments/palamos-img/palamos-2.png',
+                  '/media/img/monuments/palamos-img/palamos-3.png',
+                  '/media/img/monuments/palamos-img/palamos-4.png',
+                  '/media/img/monuments/palamos-img/palamos-5.png'
+                 ],
+        comarca: 'baix-emporda',
+        numero: 2
       }
     ],
     'baix-llobregat': [
@@ -188,7 +201,7 @@ export const monuments: ComarcaMonuments = {
         id: 'ciutadella-iberica-calafell',
         nom: 'Ciutadella Ibèrica de Calafell',
         descripcio: ``,
-        epoca: 'Segles V-I AC',
+        epoca: 'Segle II AC',
         article: `
         <article>
           <div class="article-historia">
@@ -233,8 +246,14 @@ export const monuments: ComarcaMonuments = {
         </article>
         `,
         sketchfabId: '<div class="visor"><iframe class="responsive-iframe" title="Ciutadella Ibèrica de Calafell" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/44ec8a76a1154a17921531569d347dbd/embed"> </iframe></div>',
-        imatge: '/media/img/monuments/calafell-img/calafell-1.png',
-        comarca: 'baix-penedes'
+        imatges: ['/media/img/monuments/calafell-img/calafell-1.png',
+                  '/media/img/monuments/calafell-img/calafell-2.png',
+                  '/media/img/monuments/calafell-img/calafell-3.png',
+                  '/media/img/monuments/calafell-img/calafell-4.png',
+                  '/media/img/monuments/calafell-img/calafell-5.png',
+                  ],
+        comarca: 'baix-penedes',
+        numero: 4
       }
     ],
     'barcelones': [
@@ -242,7 +261,7 @@ export const monuments: ComarcaMonuments = {
         id: 'ciutadella-barcelona',
         nom: 'La Ciutadella Borbònica de Barcelona',
         descripcio: ``,
-        epoca: 'Segles XVIII-XIX',
+        epoca: 'Segle XVIII',
         article: `<article class="container-article-monument">
     <div class="article-historia">
         <h2>Història</h2>
@@ -287,8 +306,14 @@ export const monuments: ComarcaMonuments = {
     </article>
                 `,
         sketchfabId: '<div class="visor"><iframe class="responsive-iframe" title="Barcelona XVIII" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/151200d839e146f89d1de8b9176d745e/embed?dnt=1"></iframe></div>',
-        imatge: '/media/img/monuments/barcelona-img/Image1.png',
-        comarca: 'barcelones'
+        imatges: ['/media/img/monuments/barcelona-img/ciutadella-bcn-1.png',
+                 '/media/img/monuments/barcelona-img/ciutadella-bcn-2.png',
+                 '/media/img/monuments/barcelona-img/ciutadella-bcn-3.png',
+                 '/media/img/monuments/barcelona-img/ciutadella-bcn-4.png',
+                 '/media/img/monuments/barcelona-img/ciutadella-bcn-5.png',
+                ],
+        comarca: 'barcelones',
+        numero: 3
     }
     ],
     'bergueda': [
@@ -310,7 +335,70 @@ export const monuments: ComarcaMonuments = {
 
     ],
     'girones': [
-
+      {
+        id: 'castellum-fractum',
+        nom: 'Castellum Fractum',
+        descripcio: ``,
+        epoca: 'Segle IV',
+        article: `<article class="container-article-monument">
+                    <div class="article-historia">
+                      <h2>Història</h2>
+                      <p>
+                        El Castellum Fractum, que significa "castell en ruïnes", és una fortalesa militar tardoromana situada al cim de la muntanya dels Sants Metges, al municipi de Sant Julià de Ramis. El topònim apareix documentat al segle IX, fent referència a una estructura ja en ruïnes en aquell moment. L'enclavament fou declarat Bé Cultural d'Interès Nacional el 2012.
+                      </p>
+                      <p>
+                        La fortificació fou construïda entre mitjans del segle IV i inicis del segle V dC, sobre un antic poblat ibèric datat del segle VI aC. Es tracta d'un emplaçament estratègic amb una visibilitat excepcional sobre el pas natural entre l'Empordà i la plana de Girona, i controlava la Via Augusta. El seu ús principal era el de caserna militar, magatzem d'intendència i punt de vigilància.
+                      </p>
+                      <p>
+                        La construcció presenta una planta clarament simètrica i regular, amb un gran espai central que inicialment estava cobert, envoltat per habitacions laterals destinades a diverses funcions: allotjament de soldats, emmagatzematge d'armes i subministraments, entre d'altres. Posteriorment, aquest espai central es convertí en un pati obert, les habitacions foren ampliades amb un primer pis i s'hi afegiren reforços com pilars adossats i dues torres defensives a l'entrada.
+                      </p>
+                      <p>
+                        A l'extrem nord-oest s'hi trobava un bastió amb torre de vigilància, del qual només resten dues fileres de pedra visibles. Es creu que aquest punt podria haver acollit una torre anterior d'època ibèrica.
+                      </p>
+                      <p>
+                        El Castellum Fractum va estar actiu fins a inicis del segle VIII. Amb l'arribada de les tropes àrabs i la rendició de Girona entre el 715 i el 717, l'assentament fou abandonat. Tanmateix, es pensa que fou reocupat breument pels francs l'any 785, en el marc de les seves operacions militars per recuperar Girona i consolidar la Marca Hispànica.
+                      </p>
+                      <p>
+                        Avui dia, el jaciment està museïtzat i forma part d'un itinerari arqueològic visitable que inclou també el poblat ibèric i l'ermita paleocristiana dels Sants Metges.
+                      </p>
+                    </div>
+      
+                    <div class="article-galeria">
+                      <h2>Galeria</h2>
+                      <div class="article-galeria-img">
+                        <img src="/media/img/monuments/castellum-img/castellum-2.png" alt="Vista del Castellum Fractum a Sant Julià de Ramis">
+                      </div>
+                    </div>
+      
+                    <div class="article-video">
+                      <h2>Vídeo</h2>
+                      <div class="video-wrapper">
+                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/XXXXXXXXXXX" title="Vídeo Castellum Fractum" frameborder="0" allowfullscreen></iframe>
+                      </div>
+                    </div>
+      
+                    <div class="article-saber-mes">
+                      <h2>Per Saber-ne Més</h2>
+                      <p>
+                        Si vols aprofundir en la història del Castellum Fractum i l'evolució del territori a Sant Julià de Ramis, et recomanem aquests enllaços:
+                      </p>
+                      <ul>
+                        <li><a href="https://cultura.santjuliaderamis.cat/ca/espais/l/1006-castellum-fractum.html" target="_blank">Patrimoni Cultural - Castellum Fractum</a></li>
+                        <li><a href="https://ca.wikipedia.org/wiki/Castellum_Fractum" target="_blank">Castellum Fractum - Viquipèdia</a></li>
+                      </ul>
+                    </div>
+                  </article>`,
+        sketchfabId: `<div class="visor"><iframe class="responsive-iframe" title="Castellum Fractum" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/3ca489ac97ab48948d719570ddcb83fa/embed"></iframe></div>`,
+        imatges: ['/media/img/monuments/castellum-img/castellum-1.png',
+                  '/media/img/monuments/castellum-img/castellum-2.png',
+                  '/media/img/monuments/castellum-img/castellum-3.png',
+                  '/media/img/monuments/castellum-img/castellum-4.png',
+                  '/media/img/monuments/castellum-img/castellum-5.png'
+                ],
+        comarca: 'gironès',
+        numero: 6
+      }
+      
     ],
     'maresme': [
 
@@ -410,8 +498,14 @@ export const monuments: ComarcaMonuments = {
                 </article>
                 `,
       sketchfabId: '<div class="visor"><iframe class="responsive-iframe" title="Barcelona XVIII" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/fe9f05ab4d904bc3becb03482b4ffd4e/embed"></iframe></div>',
-      imatge: '/media/img/monuments/farners-img/Image5.png',
-      comarca: 'selva'
+      imatges: ['/media/img/monuments/farners-img/Image1.png',
+               '/media/img/monuments/farners-img/Image2.png',
+               '/media/img/monuments/farners-img/Image3.png',
+               '/media/img/monuments/farners-img/Image4.png',
+               '/media/img/monuments/farners-img/Image5.png',
+                ],
+      comarca: 'selva',
+      numero: 5
               }
     ],
     'solsones': [

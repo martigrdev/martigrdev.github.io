@@ -17,9 +17,9 @@ const totsElsMonuments = Object.values(monuments).flat();
             <div class="card-grid">
               {totsElsMonuments.map((monument) => (
                 <div class="card">
-                  {monument.imatge && (
+                  {monument.imatges && monument.imatges.length > 0 && (
                     <img
-                      src={monument.imatge}
+                      src={monument.imatges[0]}
                       alt={monument.nom}
                       class="img-monument"
                     />
@@ -31,7 +31,7 @@ const totsElsMonuments = Object.values(monuments).flat();
                       href={`/comarques/${monument.comarca}/monuments/${monument.id}`}
                       class="button"
                     >
-                      Més informació
+                      Visita
                     </a>
                   </div>
                 </div>
@@ -61,10 +61,7 @@ const totsElsMonuments = Object.values(monuments).flat();
     text-align: justify;
   }
   .card {
-    border: 1px solid #b81d1d;
-    border-radius: 20px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
+    width: 400px;
   }
   .img-monument {
     width: 100%;
@@ -104,5 +101,8 @@ const totsElsMonuments = Object.values(monuments).flat();
     .card-grid {
       grid-template-columns: 1fr;
     }
+   .card {
+       max-width: 300px;
+   }
   }
 </style>

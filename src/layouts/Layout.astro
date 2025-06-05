@@ -8,7 +8,10 @@
   <body>
     <header>
       <nav>
-        <div class="logo">Catalunya Virtual</div>
+        <div class="logo">
+          <img src="/media/svg/Logo-CatalunyaVirtual-B.svg" alt="Logo" class="logo-img">
+          <span class="logo-text">Catalunya Virtual</span>
+        </div>
         <button class="nav-toggle" aria-label="toggle navigation">
           <span class="hamburger"></span>
         </button>
@@ -89,12 +92,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 1.2rem;
   }
 
   .logo {
     color: white;
     font-size: 1.5rem;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  .logo-img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
   }
 
   .nav-toggle {
@@ -144,11 +155,10 @@
   .nav-links a {
     color: white;
     text-decoration: none;
-    transition: var(--transition);
   }
 
   .nav-links a:hover {
-    color: #ff6b6b;
+    border-bottom: 2px solid white;
   }
 
   /* Footer Styles */
@@ -186,11 +196,10 @@
   .footer-section a {
     color: white;
     text-decoration: none;
-    transition: var(--transition);
   }
 
   .footer-section a:hover {
-    color: #ff6b6b;
+    border-bottom: 2px solid white;
   }
 
   .footer-bottom {
@@ -218,11 +227,16 @@
     .logo {
       font-size: 1.2rem;
     }
+    .logo-img {
+      width: 80px;
+      height: 80px;
+      margin-right: 5px;
+    }
 
     .nav-links {
       display: none;
       position: absolute;
-      top: 60px;
+      top: 100px;
       left: 0;
       right: 0;
       background-color: var(--primary-color);
@@ -230,6 +244,7 @@
       align-items: center;
       padding: 1rem;
       gap: 1rem;
+      font-size: 1rem;
     }
 
     .nav-links.show {
@@ -252,6 +267,11 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
+    }
+  }
+  @media (max-width: 1024px) {
+    .logo-text {
+      display: none;
     }
   }
 </style>

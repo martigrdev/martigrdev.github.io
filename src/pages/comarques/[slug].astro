@@ -91,9 +91,9 @@ import Layout from "../../layouts/Layout.astro";
         <div class="card-grid">
           {monumentsComarca.map((monument) => (
             <div class="card">
-              {monument.imatge && (
+              {monument.imatges && monument.imatges.length > 0 && (
                 <img
-                  src={monument.imatge}
+                  src={monument.imatges[0]}
                   alt={monument.nom}
                   class="img-monument"
                 />
@@ -105,7 +105,7 @@ import Layout from "../../layouts/Layout.astro";
                   href={`/comarques/${slug}/monuments/${monument.id}`}
                   class="button"
                 >
-                  Més informació
+                  Visita
                 </a>
               </div>
             </div>
